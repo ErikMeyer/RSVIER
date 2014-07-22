@@ -15,7 +15,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import memory.Memory;
+import memory.GamePanel;
+import memory.iGameContract;
 import models.Model;
 
 public class ListModulesView extends JPanel {
@@ -24,7 +25,7 @@ public class ListModulesView extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ListModulesView.this.changeStateTo(new ShowModuleView(ListModulesView.this.model,
-					new Memory()));
+					new GamePanel()));
 		}
 	}
 
@@ -51,7 +52,9 @@ public class ListModulesView extends JPanel {
 						file.toURI().toURL()
 					}, this.getClass().getClassLoader());
 
-					Class module = Class.forName(clazzName, true, clazzloader);
+					// Load class, but make sure it's a subclass of iGameContract
+					Class<? extends iGameContract> module = Class.forName(clazzName, true,
+							clazzloader).asSubclass(iGameContract.class);
 
 					ListModulesView.this.changeStateTo(new ShowModuleView(
 							ListModulesView.this.model, module.newInstance()));
@@ -75,13 +78,15 @@ public class ListModulesView extends JPanel {
 		}
 	}
 
+	private static final long serialVersionUID = 7480393524313653661L;
+
 	private Model model;
 
 	public ListModulesView(Model model) {
 		this.model = model;
 
 		this.add(new JLabel("Installed games:"));
-		JButton gameButtonMemory = new JButton("Memory");
+		JButton gameButtonMemory = new JButton("gameButtonMemory");
 		gameButtonMemory.addActionListener(new ButtonHandler());
 		this.add(gameButtonMemory);
 
