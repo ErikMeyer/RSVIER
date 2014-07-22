@@ -23,16 +23,28 @@ public class BjPlayer { //Possibly extends Player/Speler class from main menu pa
 		return aryHands.get(hand);
 	}
 	
+	/**
+	 * This method calculates the value of a given hand.
+	 * However, if one the cards is an ace (11) it can be
+	 * demoted to a 1 to prevent going bust.
+	 * Cycle through the cards in a hand, check if the card
+	 * is an ace and if the total is over 21, and if so change
+	 * the ace value to 1 and update the total.
+	 * 
+	 * Second thought: perhaps we should not change the value
+	 * in this get-method.
+	 * @param hand
+	 * @return
+	 */
 	public int getValue(int hand) {
-		int valueOne = aryHands.get(hand).get(0).getValue(); 
-		int valueTwo = aryHands.get(hand).get(1).getValue();
-		int total = valueOne + valueTwo;
-		for (int i = 0; i < 2; i++) { //Bezig
-			if (valueOne==11 & total > 21) {
-				valueOne = 1;
-				total = valueOne + valueTwo;
+		ArrayList<Card> aryHand = aryHands.get(hand);
+		int total = 0;
+		for (Card card: aryHand) {
+			if (((total + card.getValue()) > 21) & (card.getValue() == 11)) {
+				card.setValue(1);
 			}
-		}
-		return 0; //Change
+			total = total + card.getValue();
+		}		
+		return total;
 	}
 }
