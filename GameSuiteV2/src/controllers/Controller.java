@@ -23,7 +23,6 @@ public class Controller {
 	private JPanel panel;
 
 	public Controller() {
-
 		this.model = new Model();
 		this.model.addObserver(new ModelObserver());
 
@@ -36,7 +35,6 @@ public class Controller {
 
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setVisible(true);
-
 	}
 
 	public <E> void changePanel(E jpanel) {
@@ -46,4 +44,5 @@ public class Controller {
 		this.frame.revalidate();
 		this.frame.repaint();
 	}
+
 }

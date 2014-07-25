@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import memory.iGameContract;
 import models.Model;
 
 public class ShowModuleView extends JPanel {
@@ -22,17 +23,22 @@ public class ShowModuleView extends JPanel {
 	private class ModuleObserver implements Observer {
 		@Override
 		public void update(Observable o, Object arg) {
-			System.out.println("TEST");
+			System.out.println("A module reported a win!");
+			ShowModuleView.this.model.updatePlayerWins();
 		}
 	}
 
 	private Model model;
 
-	public <E> ShowModuleView(Model model, E e) {
-		this.model = model;
+	public <E extends iGameContract> ShowModuleView(Model model, E e) {
 
+		this.model = model;
 		E module = e;
 
+		// tell this module we want to observe it's model.
+		((iGameContract) e).addGameModelObserver(new ModuleObserver());
+
+		// add module to JFrame, assuming it's a JPanel
 		this.add((JPanel) module);
 
 		JButton mainMenuButton = new JButton("Back to Main Menu");
