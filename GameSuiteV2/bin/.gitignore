@@ -1,4 +1,8 @@
-/memory
-/gui
-/views
-/controllers
+/Launcher.class
+/blackjack/
+/controllers/
+/memory/
+/models/
+/views/
+/connectFour/
+/gui/
