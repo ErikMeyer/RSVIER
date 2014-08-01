@@ -1,18 +1,13 @@
 package blackjack;
 
-import javax.swing.JPanel;
-
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import memory.Memory;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ListIterator;
 
 
 public class Blackjack extends JPanel {
